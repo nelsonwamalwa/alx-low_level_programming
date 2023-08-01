@@ -2,8 +2,8 @@
 
 /**
  * add_nodeint_end -This line  adds a node at the end of a linked list
- * head:The pointer to the first element in the list
- * n:The data to insert in the new element
+ * @head:The pointer to the first element in the list
+ * @n:The data to insert in the new element
  *
  * Return: pointer to the new node, or NULL if it fails
  */
