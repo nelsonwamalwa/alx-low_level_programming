@@ -1,14 +1,14 @@
 #include "main.h"
 
 /**
- * to get from one number to another.
- * flip_bits - This syntax counts the number of bits to change.
- * @n: Our first number.
- * @m: Is second number.
+ * flip_bits -This loop  counts the number of bits to change
+ * to get from one number to another
+ * @n:The  first number
+ * @m:The  second number
  *
  * Return: number of bits to change
  */
-unsigned int flip_bits(unsigned long int n, unsigned long int m)
+
 {
 	int i, count = 0;
 	unsigned long int current;
