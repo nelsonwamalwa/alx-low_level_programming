@@ -1,54 +1,46 @@
 #include "lists.h"
+#include <stdlib.h>
 
 /**
- * insert_dnodeint_at_index - This inserts a new given 
- * node at a given position
- * @h: The head of the list
- * @idx: The index of the new node
- * @n: A value of new node
- * Return: Returns the address of the new node
- * or NULL if it is failed.
+ * insert_dnodeint_at_index - this inserts a new node
+ * @head: a pointer to  first node in the list
+ * @idx: the index where the new node is added
+ * @n: a data to insert in the new node
+ * Return: A pointer to new node or NULL
  */
-dlistint_t *insert_dnodeint_at_index(dlistint_t **h, unsigned int idx, int n)
-{
-	dlistint_t *new;
-	dlistint_t *head;
-	unsigned int i;
 
-	new = NULL;
-	if (idx == 0)
-		new = add_dnodeint(h, n);
-	else
+dlistint_t *insert_dnodeint_at_index(dlistint_t **head, unsigned int idx, int n)
+{
+	unsigned int i;
+	dlistint_t *newnode;
+	dlistint_t *tempnode = *head;
+
+	newnode = malloc(sizeof(dlistint_t));
+	if (!newnode || !head)
 	{
-		head = *h;
-		i = 1;
-		if (head != NULL)
-			while (head->prev != NULL)
-				head = head->prev;
-		while (head != NULL)
+		return (NULL);
+	}
+	newnode->n = n;
+	newnode->next = NULL;
+
+	if (idx == 0)
+	{
+		newnode->next = *head;
+		*head = newnode;
+		return (newnode);
+	}
+	for (i = 0; tempnode && i < idx; i++)
+	{
+		if (i == idx - 1)
 		{
-			if (i == idx)
-			{
-				if (head->next == NULL)
-					new = add_dnodeint_end(h, n);
-				else
-				{
-					new = malloc(sizeof(dlistint_t));
-					if (new != NULL)
-					{
-						new->n = n;
-						new->next = head->next;
-						new->prev = head;
-						head->next->prev = new;
-						head->next = new;
-					}
-				}
-				break;
-			}
-			head = head->next;
-			i++;
+			newnode->next = tempnode->next;
+			tempnode->next = newnode;
+			return (newnode);
+		}
+		else
+		{
+			tempnode = tempnode->next;
 		}
 	}
-
-	return (new);
+	return (NULL);
 }
